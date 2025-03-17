@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Trang chủ quản trị</title>
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dkmug1913/image/upload/v1737021360/WebApp/Thi%E1%BA%BFt_k%E1%BA%BF_ch%C6%B0a_c%C3%B3_t%C3%AAn_1_hm4lv2.png"/>
+    <link th:href="@{/css/loading.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    <script th:src="@{/jquery-3.6.1/jquery-3.6.1.js}"></script>
+    <script th:src="@{/dayjs-1.11.13/dayjs.min.js}"></script>
+    <script th:src="@{/sweetalert2-10/sweetalert2-10.js}"></script>
+    <script th:src="@{/sweetalert2-10/clipboard.min.js}"></script>
+    <script th:src="@{/js/logout.js}"></script>
+</head>
+<body id="page-top">
+<div id="loading-animation" class="loadingio-spinner-double-ring-nkp2c2ew929">
+    <div class="ldio-sy03huelm1">
+        <div></div>
+        <div></div>
+        <div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+        </div>
+    </div>
+</div>
+<div id="wrapper">
+    <div th:replace="~{layout/admin-sidebar :: admin-sidebar}"></div>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="~{layout/admin-topbar :: admin-topbar}"></div>
+            <div class="container-fluid" style="margin-top: 94px;">
+                <div layout:fragment="content"></div>
+            </div>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © ANITSHOP 2023</span></div>
+            </div>
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script>
+    window.onload = () => {
+        let loading = document.getElementById('loading-animation');
+        setTimeout(() => {
+            loading.style.display = 'none';
+        }, 1000);
+    };
+</script>
+<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/chart.min.js}"></script>
+<script th:src="@{/assets/js/bs-init.js}"></script>
+<script th:src="@{/assets/js/theme.js}"></script>
+<script th:src="@{/js/admin/admin.js}"></script>
+<th:block layout:fragment="page-scripts"></th:block>
+</body>
+</html>

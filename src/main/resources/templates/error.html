@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/base.html}">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title th:text="${title}">Lỗi truy cập</title>
+  <link rel="shortcut icon" href="https://res.cloudinary.com/dkmug1913/image/upload/v1737021360/WebApp/Thi%E1%BA%BFt_k%E1%BA%BF_ch%C6%B0a_c%C3%B3_t%C3%AAn_1_hm4lv2.png"/>
+</head>
+<body>
+<div layout:fragment="content" style="background: url(https://res.cloudinary.com/dkmug1913/image/upload/v1706077822/WebApp/access-denied_bbb882.jpg) top center / cover no-repeat; min-height: 97vh;">
+  <div style="margin: auto; text-align: center;">
+    <h1 style="padding-top: 5%; color: red;">TRUY CẬP BỊ TỪ CHỐI</h1>
+    <h3 style="padding: 20px; color: #fff" th:text="${message}">LỖI TRUY CẬP</h3>
+  </div>
+</div>
+</body>
+</html>

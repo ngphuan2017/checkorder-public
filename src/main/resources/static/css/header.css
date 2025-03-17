@@ -1,0 +1,151 @@
+:root {
+    --borderRadius-100: 2px;
+    --margin-100: 0.3rem;
+    --margin-200: 1rem;
+    --transitionDelay-100: all 0.3s;
+    --transition-100: all 0.3s;
+    --transition-200: all 0.1s;
+}
+
+* {
+    box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+*::after, *::before {
+    content: '';
+}
+
+.nav-menu {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem;
+}
+
+
+/*_____menu button_____*/
+.menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: block;
+    outline: 0;
+    font-size: 25px;
+}
+
+.menu-button .button-bar {
+    position: relative;
+    width: 65px;
+    color: #01feff;
+    margin-bottom: var(--margin-100);
+    transition: var(--transition-100);
+}
+
+.menu-button .button-bar:hover {
+    color: #00ffff;
+    transform: scale(1.1);
+    text-shadow: 0 0 5px #00ffff;
+}
+
+.menu-button .button-bar.open-menu {
+    transform: rotate(180deg);
+    margin-bottom: var(--margin-200);
+}
+
+.menu-button .button-bar.open-menu::before {
+    height: calc(100% - 2px);
+    left: 3.5px;
+    transform: skew(-15deg) translateY(2px);
+}
+
+.menu-button .button-bar::after {
+    left: 0;
+    top: -7px;
+    height: 7px;
+    width: 70%;
+    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.menu-button .button-bar::before {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    transition: var(--transition-200);
+}
+
+.menu-button .button-bar:hover::before {
+    height: calc(100% - 2px);
+    left: 3.5px;
+    transform: skew(-15deg) translateY(2px);
+}
+
+#ul {
+    height: 0;
+    margin-top: var(--margin-200);
+    overflow-y: hidden;
+}
+
+#ul.open-ul {
+    height: auto;
+}
+
+#ul .nav-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffff00;
+    gap: 0.3rem;
+    font-size: 14px;
+    font-weight: 300;
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: var(--transition-100);
+    transition-delay: var(--transitionDelay-100);
+}
+
+#ul .nav-links:hover {
+    text-decoration: underline;
+}
+
+#ul .nav-links.show-nav-links {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#ul .nav-links .link-bar {
+    position: relative;
+    font-size: 25px;
+    margin-bottom: var(--margin-100);
+    border-bottom-left-radius: var(--borderRadius-100);
+    border-bottom-right-radius: var(--borderRadius-100);
+}
+
+#ul .nav-links .link-bar::after {
+    right: 0;
+    top: -15px;
+    height: 15px;
+    aspect-ratio: 1;
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
+}
+
+#ul .nav-links .link-bar::before {
+    left: 0;
+    top: -15px;
+    height: 15px;
+    width: calc(100% - 15px);
+    aspect-ratio: 1;
+    border-top-left-radius: var(--borderRadius-100);
+}
+
+#ul .nav-links:hover {
+    color: #aaff00;
+    text-shadow: 0 0 5px #aaff00;
+}

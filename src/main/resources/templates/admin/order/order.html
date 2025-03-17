@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin-base.html}">
+<head>
+    <th:block layout:fragment="page-scripts">
+        <script th:src="@{/js/admin/order.js}"></script>
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content" class="container-fluid">
+    <h3 class="text-dark mb-4">Quản lý đơn hàng</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-primary m-0 fw-bold">Thông tin đơn hàng</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-md-end">
+                        <button type="button" class="btn btn-outline-success js-add-cart-add" onclick="addOrder()">Thêm đơn hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 text-nowrap">
+                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label
+                            class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
+                        <option value="10">10</option>
+                        <option value="25" selected="">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>&nbsp;</label></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input
+                            type="search" class="form-control form-control-sm" aria-controls="dataTable"
+                            placeholder="Search"></label></div>
+                </div>
+            </div>
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table table-hover my-0">
+                    <thead>
+                    <tr>
+                        <th></th> <!-- id -->
+                        <th>STT</th>
+                        <th>Khách hàng</th>
+                        <th>Ngày kích hoạt</th>
+                        <th>Ngày hết hạn</th>
+                        <th>Mã bí mật</th>
+                        <th>Tài khoản</th>
+                        <th>Trạng thái</th>
+                        <th>Số lượt còn</th>
+                        <th>Ngày truy cập</th>
+                        <th>Người duyệt</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="orderTableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-6 align-self-center">
+                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite"></p>
+                </div>
+                <div class="col-md-6">
+                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:;">«</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:;">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:;">»</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="js-modal">
+        <div class="modal-container-black js-modal-container">
+            <div class="js-modal-close">x</div>
+            <header class="modal-header-black">
+                <span><i class="fas fa-address-card"></i> Thông tin</span>
+            </header>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="modal-img-black" id="modal-account-img">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-6 col-12">
+                        <div class="modal-content" id="modal-account-about">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-modal-black" id="modal-account-title">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="js-modal-edit">
+        <div class="modal-container-black js-modal-container-edit">
+            <div class="js-modal-close-edit">x</div>
+            <header class="modal-header-black">
+                <span><i class="fas fa-user-edit"></i> Chỉnh sửa thông tin</span>
+            </header>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="modal-img-black" id="modal-account-img-edit">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-6 col-12">
+                        <div class="modal-content" id="modal-account-about-edit">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-3" id="change-profile-account">
+
+            </div>
+            <div class="footer-modal-black">
+                <i class="fas fa-crown" style="color: yellow;"></i>
+                <span class="text-account-title">
+                #*****#
+                </span>
+                <i class="fas fa-crown" style="color: yellow;"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="js-modal-add">
+        <div class="modal-container-black js-modal-container-add">
+            <div class="js-modal-close-add">x</div>
+            <header class="modal-header-black">
+                <span><i class="fas fa-edit"></i> Thêm đơn hàng mới</span>
+            </header>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="modal-img-black" id="modal-account-img-add">
+
+                        </div>
+                    </div>
+                    <div style="padding: 0 1.5rem 0 12px;" class="col-lg-9 col-md-9 col-sm-6 col-12">
+                        <div class="modal-content" id="modal-account-about-add">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-3">
+                <button type="button" class="m-1 btn btn-outline-success" onclick="saveAddOrder()">Lưu</button>
+                <button type="button" class="m-1 btn btn-outline-danger" onclick="hideAddProfile()">Trở lại</button>
+            </div>
+            <div class="footer-modal-black">
+                <i class="fas fa-crown" style="color: yellow;"></i>
+                <span class="text-account-title">
+                #*****#
+                </span>
+                <i class="fas fa-crown" style="color: yellow;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

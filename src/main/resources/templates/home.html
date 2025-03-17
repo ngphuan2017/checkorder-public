@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/base.html}">
+    <head>
+        <th:block layout:fragment="page-scripts">
+            <script th:src="@{/js/javascript.js}"></script>
+        </th:block>
+    </head>
+    <body class="body-access">
+    <div layout:fragment="content">
+        <div class="body-secret">
+                <label for="password">Password</label>
+                <input
+                        class="access-secret"
+                        id="password"
+                        type="password"
+                        oninput="checkSecretKey()"
+                        placeholder="Nhập mã secret key..."
+                        required
+                        title="Nhập mã secret key... 🤫"
+                />
+                <input id="login" onclick="accessSecret()" type="checkbox" />
+                <label class="login-button" for="login">
+                    <span>Xác minh</span>
+                    <svg>
+                        <path d="M10,17V14H3V10H10V7L15,12L10,17M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V16H7V20H17V4H7V8H5V4A2,2 0 0,1 7,2Z"></path>
+                    </svg>
+                </label>
+                <div class="padlock">
+                    <div class="padlock__hook">
+                        <div class="padlock__hook-body"></div>
+                        <div class="padlock__hook-body"></div>
+                    </div>
+                    <div class="padlock__body">
+                        <div class="padlock__face">
+                            <div class="padlock__eye padlock__eye--left"></div>
+                            <div class="padlock__eye padlock__eye--right"></div>
+                            <div class="padlock__mouth padlock__mouth--one"></div>
+                            <div class="padlock__mouth padlock__mouth--two"></div>
+                            <div class="padlock__mouth padlock__mouth--three"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app">
+                    <h1 class="text-success-light p-3">🎉 Xác minh thành công! 🎉</h1>
+                    <div class="button-group">
+                        <button class="button-authentication" id="button-authentication" type="button" onclick="call2fa()">Lấy mã xác thực 2FA</button>
+                        <div class="d-none" id="spinner-loading">
+                            <div id="loading"></div>
+                        </div>
+                        <input id="cancel" onclick="cancelSecret()" type="checkbox" />
+                        <label class="button-cancel" for="cancel">
+                            <p class="content-cancel">Quay lại</p>
+                        </label>
+                    </div>
+                    <div class="content">
+                        <h3 class="text-primary-light text-center">Thông tin đơn hàng:</h3>
+                        <div id="order-info"></div>
+                    </div>
+                    <div class="content">
+                        <h3 class="text-primary-light text-center">Hướng dẫn sử dụng:</h3>
+                        <div>
+                            <ol>
+                                <li><strong class="text-yellow">Hướng dẫn đăng nhập</strong>
+                                    <ul class="line-spacing">
+                                        <li><span>❗️Lưu ý: Tài khoản được shop cung cấp <strong class="text-danger-light">không phải</strong> là tài khoản Google, Microsoft, Apple.</span></li>
+                                        <li><button type="button" class="btn btn-outline-info" onclick="showImage()">Hướng dẫn</button></li>
+                                    </ul>
+                                </li>
+                                <li><strong class="text-yellow">Lưu ý khi lấy mã 🔑</strong>
+                                    <ul class="line-spacing">
+                                        <li><span>Mỗi ngày anh/chị chỉ có 2️⃣ lượt lấy mã.</span></li>
+                                        <li><span>Dùng hết là chờ đến mai.</span></li>
+                                        <li><span>Đây không phải là sự lựa chọn, mà là nguyên tắc.</span></li>
+                                        <li><span>Đừng lãng phí.</span></li>
+                                        <li><span>Quyền lực có hạn, và mọi hành động đều có giá.</span></li>
+                                    </ul>
+                                </li>
+                                <li><strong class="text-yellow">Thời gian duy trì 1 lần đăng nhập 🕓</strong>
+                                    <ul class="line-spacing">
+                                        <li><span>Phiên đăng nhập với mã xác minh danh tính (2fa) sẽ duy trì 2 - 3 ngày thôi nha anh/chị.</span></li>
+                                        <li><span>Nên khi bị đăng xuất anh/chị đừng ngạc nhiên. Vì đã hết phiên làm việc của session đó.</span></li>
+                                        <li><span>Nên là khi nó tự logout thì anh/chị vào đây lấy mã để login lại dùng tiếp.</span></li>
+                                    </ul>
+                                </li>
+                                <li><strong class="text-yellow">Cách gia hạn ChatGPT Plus giá rẻ hơn 💸</strong>
+                                    <ul class="line-spacing">
+                                        <li><span>Để gia hạn ChatGPT Plus (GPT-4) 30 ngày (Cần đặt trước 1 - 7 ngày).</span></li>
+                                        <li><span>Quý khách vui lòng truy cập gian hàng của chúng tôi <a class="text-info" href="javascript:;">tại đây</a></span></li>
+                                        <li><span>Shop chỉ nhận các đơn đặt trước từ 1 đến 7 ngày trước khi đơn hàng hết hạn.</span></li>
+                                        <li><span>Đặt trước giúp quý khách hưởng mức giá ưu đãi chỉ còn 50k/tháng.</span></li>
+                                    </ul>
+                                </li>
+                                <li><strong class="text-yellow">Cách xử lý khi bị lỗi</strong>
+                                    <ul class="line-spacing">
+                                        <li><button type="button" class="btn btn-outline-info" onclick="showError()">Hiển thị</button></li>
+                                    </ul>
+                                </li>
+                            </ol>
+                            <i class="text-center"><span>⚠️ Lưu ý: Mã xác minh sẽ làm mới liên tục mỗi phút và nó chỉ có tác dụng trong 1 phút.</span></i>
+                        </div>
+                    </div>
+                    <h4 class="text-primary-light" style="margin-top: 20px;">Nhóm ChatGPT Plus</h4>
+                    <div class="row m-3">
+                        <div id="icon">
+                            <ul class="social">
+                                <li>
+                                    <a target="_blank" rel="noopener" href="https://t.me/dichvutaikhoanonline">
+                                        <i class="fa-brands fa-telegram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="image-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeImage()">&times;</span>
+                    <img id="image-login" src="https://res.cloudinary.com/dkmug1913/image/upload/v1739958576/WebApp/Screenshot_2024-12-16_194809_e9ggbs.png" />
+                </div>
+            </div>
+            <div id="error-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeError()">&times;</span>
+                    <img id="image-error" src="https://res.cloudinary.com/dkmug1913/image/upload/v1739958575/WebApp/photo_2024-11-12_15-51-01_owcnlo.jpg" />
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<header th:fragment="header">
+    <nav class="nav-menu" id="nav-menu">
+        <button class="menu-button" id="menu-button" onclick="openMenu()">
+            <div class="button-bar" id="button-bar"><i class="fa-solid fa-bars"></i></div>
+        </button>
+
+        <ul id="ul">
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+                <a th:href="@{/admin}" class="nav-links">
+                    <div class="link-bar"><i class="fa-solid fa-user-check"></i></div>
+                    Admin
+                </a>
+            </li>
+
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+                <a href="#" class="nav-links">
+                    <div class="link-bar"><i class="fa-solid fa-user"></i></div>
+                    Tài khoản
+                </a>
+            </li>
+
+            <li th:unless="${#authorization.expression('isAuthenticated()')}">
+                <a th:href="@{/login}" class="nav-links">
+                    <div class="link-bar"><i class="fa-solid fa-right-to-bracket"></i></div>
+                    Đăng nhập
+                </a>
+            </li>
+
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+                <a href="javascript:;" class="nav-links" onclick="handleLogout()">
+                    <div class="link-bar"><i class="fa-solid fa-right-from-bracket"></i></div>
+                    Đăng xuất
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Tài Khoản Online</title>
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dkmug1913/image/upload/v1737021360/WebApp/Thi%E1%BA%BFt_k%E1%BA%BF_ch%C6%B0a_c%C3%B3_t%C3%AAn_1_hm4lv2.png"/>
+    <link th:href="@{/css/loading.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/login.css}" rel="stylesheet"/>
+    <link th:href="@{/css/register.css}" rel="stylesheet"/>
+    <script th:src="@{/sweetalert2-10/sweetalert2-10.js}"></script>
+    <script th:src="@{/sweetalert2-10/clipboard.min.js}"></script>
+    <script th:src="@{/dayjs-1.11.13/dayjs.min.js}"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script th:src="@{/js/header.js}"></script>
+    <script th:src="@{/js/logout.js}"></script>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<div id="loading-animation" class="loadingio-spinner-double-ring-nkp2c2ew929">
+    <div class="ldio-sy03huelm1">
+        <div></div>
+        <div></div>
+        <div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+        </div>
+    </div>
+</div>
+<!-- Main content -->
+<div layout:fragment="content"></div>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script>
+    window.onload = () => {
+        let loading = document.getElementById('loading-animation');
+        setTimeout(() => {
+            loading.style.display = 'none';
+        }, 1000);
+    };
+</script>
+<th:block layout:fragment="page-scripts"></th:block>
+</body>
+</html>
